@@ -1,8 +1,8 @@
 branch-defaults:
   master:
-    environment: MyDummyApp-env
+    environment: MyDummyApp-env-latest
 environment-defaults:
-  MyDummyApp-env:
+  MyDummyApp-env-latest:
     branch: null
     repository: null
 global:
