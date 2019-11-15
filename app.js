@@ -29,4 +29,4 @@ var server = http.createServer(function (req, res) {
 });
 
 server.listen(port);
-console.log('Server running at http://127.0.0.1:' + port + '/');
+console.log('Server running on ' + process.env.ENVIRONMENT + ' at http://127.0.0.1:' + port + '/');
