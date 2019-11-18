@@ -7,6 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Check python version
+          command: python --version
+      - run:
           name: Install Python 3.7
           command: sudo apt-get install python3.7
       - run:
