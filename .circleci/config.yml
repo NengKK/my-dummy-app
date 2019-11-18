@@ -13,6 +13,9 @@ jobs:
           name: Check shell's profile
           command: ls -a ~
       - run:
+          name: Check $PATH
+          command: echo $PATH
+      - run:
           name: Check python version
           command: python --version
       - run:
@@ -21,10 +24,12 @@ jobs:
       - run:
           name: Install awscli
           command: |
-            sudo pip install awsebcli --upgrade --user
+            sudo pip install awsebcli --upgrade
       - run:
           name: Add executable path
-          command: export PATH=~/.local/bin:$PATH
+          command: |
+            export PATH=~/.local/bin:$PATH
+            echo $PATH
       - run:
           name: Create AWS credentials manually
           command: |
