@@ -7,8 +7,14 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Check unix release
+          command: lsb_release -a
+      - run:
           name: Check python version
           command: python --version
+      - run:
+          name: Install PIP
+          command: apt install python-pip
       - run:
           name: Install awscli
           command: |
