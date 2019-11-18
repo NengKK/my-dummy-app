@@ -10,6 +10,9 @@ jobs:
           name: Check unix release
           command: lsb_release -a
       - run:
+          name: Check shell's profile
+          command: ls -a ~
+      - run:
           name: Check python version
           command: python --version
       - run:
@@ -19,6 +22,9 @@ jobs:
           name: Install awscli
           command: |
             sudo pip install awsebcli --upgrade --user
+      - run:
+          name: Add executable path
+          command: export PATH=~/.local/bin:$PATH
       - run:
           name: Create AWS credentials manually
           command: |
