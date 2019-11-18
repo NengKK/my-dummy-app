@@ -10,18 +10,6 @@ jobs:
           name: Check python version
           command: python --version
       - run:
-          name: Install Python 3.7
-          command: sudo apt-get install python3.7
-      - run:
-          name: Install pip
-          command: curl -O https://bootstrap.pypa.io/get-pip.py
-      - run:
-          name: Run the script with python
-          command: python3 get-pip.py --user
-      - run:
-          name: Add executable path
-          command: export PATH=~/.local/bin:$PATH
-      - run:
           name: Install awscli
           command: |
             sudo pip install awsebcli --upgrade --user
