@@ -76,11 +76,11 @@ jobs:
             echo "[profile eb-cli]" > ~/.aws/config
             echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/config
             echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
-      - run:
-          name: Set environment variables
-          command: |
-            eb use MyDummyApp-env-latest --profile eb-cli
-            eb setenv CIRCLE_CI_TOKEN=${CIRCLE_CI_TOKEN} GITHUB_USER=${GITHUB_USER} PROJECT_NAME=${PROJECT_NAME}
+      #- run:
+      #    name: Set environment variables
+      #    command: |
+      #      eb use MyDummyApp-env-latest --profile eb-cli
+      #      eb setenv CIRCLE_CI_TOKEN=${CIRCLE_CI_TOKEN} GITHUB_USER=${GITHUB_USER} PROJECT_NAME=${PROJECT_NAME}
       - run:
           name: Deploy to EB (latest)
           command: |

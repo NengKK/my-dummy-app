@@ -14,7 +14,7 @@
 		"removeComments": true,
 		"lib": ["es6", "esnext"],
 		"moduleResolution": "node",
-        "outDir": "./build"
+        "outDir": "./built"
 	},
 	"exclude": ["node_modules", "test/**/*.spec.ts"]
 }
