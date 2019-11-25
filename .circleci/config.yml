@@ -5,6 +5,14 @@ defaults: &defaults
 eb_node_workspace: &eb_node_workspace
   docker:
     - image: circleci/python:2.7
+restore_checkout: &restore_checkout
+  restore_cache:
+    keys:
+      - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+restore_dependencies: &restore_dependencies
+  restore_cache:
+    name: Restore NPM dependency
+    key: v1-dependencies-{{ checksum "package-lock.json" }}
 jobs:
   checkout_code:
     <<: *defaults
@@ -17,9 +25,16 @@ jobs:
   install_dependencies:
     <<: *defaults
     steps:
+      - <<: *restore_checkout
+      - <<: *restore_dependencies
       - run:
           name: Install npm package
           command: npm install
+      - save_cache:
+          name: Save NPM dependency cache
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
       - persist_to_workspace:
           root: .
           paths:
@@ -27,6 +42,8 @@ jobs:
   build:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: .
       - run: npm run build
       - persist_to_workspace:
           root: .
