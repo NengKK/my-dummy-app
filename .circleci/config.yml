@@ -7,28 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install awscli
+          name: Install
           command: |
-            sudo pip install awsebcli --upgrade
-      - run:
-          name: Create AWS credentials manually
-          command: |
-            mkdir ~/.aws
-            touch ~/.aws/config
-            chmod 600 ~/.aws/config
-            echo "[profile eb-cli]" > ~/.aws/config
-            echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/config
-            echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
-      - run:
-          name: Set environment variables
-          command: |
-            eb use MyDummyApp-env-latest --profile eb-cli
-            eb setenv CIRCLE_CI_TOKEN=${CIRCLE_CI_TOKEN} GITHUB_USER=${GITHUB_USER} PROJECT_NAME=${PROJECT_NAME}
-      - run:
-          name: Deploy to EB
-          command: |
-            eb use MyDummyApp-env-latest --profile eb-cli
-            eb deploy -v --staged --profile eb-cli
+            npm install
 workflows:
   version: 2
   build-deploy:
@@ -37,4 +18,4 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - test-branch-changing
