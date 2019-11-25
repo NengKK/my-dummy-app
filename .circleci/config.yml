@@ -1,20 +1,78 @@
 version: 2
+defaults: &defaults
+  docker:
+    - image: circleci/node:10.16.0-browsers
+eb_node_workspace: &eb_node_workspace
+  docker:
+    - image: circleci/python:2.7
 jobs:
-  deploy:
-    docker:
-      - image: circleci/node:10.16.0-browsers
+  checkout_code:
+    <<: *defaults
     steps:
       - checkout
+  install_dependencies:
+    <<: *defaults
+    steps:
       - run:
-          name: Install
+          name: Install npm package
+          command: npm install
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  build:
+    <<: *defaults
+    steps:
+      - run: npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+  deploy:
+    <<: *eb_node_workspace
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Install awscli
           command: |
-            npm install
+            sudo pip install awsebcli --upgrade
+      - run:
+          name: Create AWS credentials manually
+          command: |
+            mkdir ~/.aws
+            touch ~/.aws/config
+            chmod 600 ~/.aws/config
+            echo "[profile eb-cli]" > ~/.aws/config
+            echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/config
+            echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
+      - run:
+          name: Set environment variables
+          command: |
+            eb use MyDummyApp-env-latest --profile eb-cli
+            eb setenv CIRCLE_CI_TOKEN=${CIRCLE_CI_TOKEN} GITHUB_USER=${GITHUB_USER} PROJECT_NAME=${PROJECT_NAME}
+      - run:
+          name: Deploy to EB (latest)
+          command: |
+            eb use MyDummyApp-env-latest --profile eb-cli
+            eb deploy -v --staged --profile eb-cli
 workflows:
   version: 2
   build-deploy:
     jobs:
+      - checkout_code
+      - install_dependencies:
+          requires:
+            - checkout_code
+      - build:
+          requires:
+            - install_dependencies
       - deploy:
+          requires:
+            - build
           filters:
             branches:
               only:
+                - master
                 - test-branch-changing

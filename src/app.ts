@@ -6,7 +6,7 @@ const port = process.env.PORT || '3000';
 const app: express.Application = express();
 
 app.get('/', (req, res) => {
-    res.send('OK');
+    res.send(`on ${ShowBranch.BRANCH} branch`);
 });
 
 app.listen(port, () => {
