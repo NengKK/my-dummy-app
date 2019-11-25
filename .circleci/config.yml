@@ -57,7 +57,12 @@ jobs:
     working_directory: ~/repo
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: .
+      - run:
+          name: Test current directory
+          command: |
+            sudo pwd
+            sudo ls -la
       - run:
           name: Install awscli
           command: |
