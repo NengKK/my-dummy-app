@@ -2,8 +2,7 @@ version: 2
 jobs:
   deploy:
     docker:
-      - image: circleci/python:2.7
-    working_directory: ~/repo
+      - image: circleci/node:10.16.0-browsers
     steps:
       - checkout
       - run:
