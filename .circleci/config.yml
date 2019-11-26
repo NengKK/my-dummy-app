@@ -34,8 +34,8 @@ jobs:
           name: Avoid hosts unknown for github
           command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
       - run:
-          name: Edit package.json
-          command: sed -i -e 's/"dummy-package":.\+/"dummy-packages": "git+ssh:\/\/git@github.com\/NengKK\/dummy-package.git#fail",/g' package.json
+          name: Give permission to scripts
+          command: chmod -R 755 ./scripts
       - run:
           name: Install npm package
           command: npm install
