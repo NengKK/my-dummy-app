@@ -27,16 +27,28 @@ jobs:
     steps:
       - <<: *restore_checkout
       - run:
+          name: List file and directory
+          command: ls -la
+      - run:
+          name: view before package.json
+          command: cat package.json
+      - run:
           name: Check sed
           command: sed --help
       - run:
           name: Edit package.json
           command: sed -i 's/dummy-package.git/dummy-package.git#fail/g' package.json
+      - run:
+          name: view after package.json
+          command: cat package.json
   install_dependencies:
     <<: *defaults
     steps:
       - <<: *restore_checkout
       - <<: *restore_dependencies
+      - run:
+          name: List file and directory
+          command: ls -la
       - run:
           name: Avoid hosts unknown for github
           command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
