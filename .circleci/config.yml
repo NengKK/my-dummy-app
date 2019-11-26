@@ -28,17 +28,9 @@ jobs:
       - <<: *restore_checkout
       - <<: *restore_dependencies
       - run:
-          name: List file and directory
-          command: ls -la
-      - run:
           name: Avoid hosts unknown for github
           command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-      - run:
-          name: Give permission to scripts
-          command: chmod -R 755 ./scripts
-      - run:
-          name: Install npm package
-          command: npm install
+      - run: make install
       - save_cache:
           name: Save NPM dependency cache
           key: v1-dependencies-{{ checksum "package-lock.json" }}
