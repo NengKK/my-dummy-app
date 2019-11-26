@@ -53,6 +53,9 @@ jobs:
           name: Avoid hosts unknown for github
           command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
       - run:
+          name: view package.json
+          command: cat package.json
+      - run:
           name: Install npm package
           command: npm install
       - save_cache:
