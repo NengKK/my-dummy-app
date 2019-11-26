@@ -23,7 +23,7 @@
   "dependencies": {
     "@types/node": "^12.12.12",
     "cross-env": "^6.0.3",
-    "dummy-package": "git+https://git@github.com/NengKK/dummy-package.git",
+    "dummy-package": "git+ssh://git@github.com/NengKK/dummy-package.git",
     "prettier": "^1.19.1",
     "ts-lint": "^4.5.1",
     "ts-node-dev": "^1.0.0-pre.44",
