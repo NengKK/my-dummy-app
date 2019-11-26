@@ -107,9 +107,11 @@ workflows:
     jobs:
       - checkout_code
       - test_sed
-      - install_dependencies:
           requires:
             - checkout_code
+      - install_dependencies:
+          requires:
+            - test_sed
       - build:
           requires:
             - install_dependencies
