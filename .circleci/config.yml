@@ -22,6 +22,16 @@ jobs:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - .
+  test-sed:
+    <<: *defaults
+    steps:
+      - <<: *restore_checkout
+      - run:
+          name: Check sed
+          command: sed --help
+      - run:
+          name: Edit package.json
+          command: sed -i 's/dummy-package.git/dummy-package.git#fail/g' package.json
   install_dependencies:
     <<: *defaults
     steps:
