@@ -106,7 +106,7 @@ workflows:
   build-deploy:
     jobs:
       - checkout_code
-      - test_sed
+      - test_sed:
           requires:
             - checkout_code
       - install_dependencies:
