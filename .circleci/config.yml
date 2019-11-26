@@ -22,7 +22,7 @@ jobs:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - .
-  test-sed:
+  test_sed:
     <<: *defaults
     steps:
       - <<: *restore_checkout
@@ -106,6 +106,7 @@ workflows:
   build-deploy:
     jobs:
       - checkout_code
+      - test_sed
       - install_dependencies:
           requires:
             - checkout_code
