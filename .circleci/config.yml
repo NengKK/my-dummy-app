@@ -22,25 +22,6 @@ jobs:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - .
-  test_sed:
-    <<: *defaults
-    steps:
-      - <<: *restore_checkout
-      - run:
-          name: List file and directory
-          command: ls -la
-      - run:
-          name: view before package.json
-          command: cat package.json
-      - run:
-          name: Check sed
-          command: sed --help
-      - run:
-          name: Edit package.json
-          command: sed -i 's/dummy-package.git/dummy-package.git#fail/g' package.json
-      - run:
-          name: view after package.json
-          command: cat package.json
   install_dependencies:
     <<: *defaults
     steps:
@@ -53,8 +34,8 @@ jobs:
           name: Avoid hosts unknown for github
           command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
       - run:
-          name: view package.json
-          command: cat package.json
+          name: Edit package.json
+          command: sed -i 's/dummy-package.git/dummy-package.git#fail/g' package.json
       - run:
           name: Install npm package
           command: npm install
@@ -121,12 +102,9 @@ workflows:
   build-deploy:
     jobs:
       - checkout_code
-      - test_sed:
-          requires:
-            - checkout_code
       - install_dependencies:
           requires:
-            - test_sed
+            - checkout_code
       - build:
           requires:
             - install_dependencies
