@@ -127,10 +127,10 @@ workflows:
             branches:
               only:
                 - master
-      # - fast_deploy:
-      #     requires:
-      #         - build
-      #     filters:
-      #       branches:
-      #         only:
-      #           - test-branch-changing
+      - fast_deploy:
+          requires:
+              - build
+          filters:
+            branches:
+              only:
+                - test-branch-changing
