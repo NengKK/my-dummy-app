@@ -30,9 +30,9 @@ jobs:
       - run:
           name: Avoid hosts unknown for github
           command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-      - run:
-          name: Give preinstall scripts permission
-          command: chmod -R 755 ./scripts
+      # - run:
+      #     name: Give preinstall scripts permission
+      #     command: chmod -R 755 ./scripts
       - run: make install
       - save_cache:
           name: Save NPM dependency cache
@@ -129,10 +129,10 @@ workflows:
             branches:
               only:
                 - master
-      - fast_deploy:
-          requires:
-              - build
-          filters:
-            branches:
-              only:
-                - test-branch-changing
+      # - fast_deploy:
+      #     requires:
+      #         - build
+      #     filters:
+      #       branches:
+      #         only:
+      #           - test-branch-changing
