@@ -77,12 +77,12 @@ jobs:
       - run:
           name: Set environment variables
           command: |
-            eb use MyDummyApp-env-latest --profile eb-cli
+            eb use MyDummyApp-env-poc --profile eb-cli
             eb setenv CIRCLE_BRANCH=${CIRCLE_BRANCH} CIRCLE_CI_TOKEN=${CIRCLE_CI_TOKEN} GITHUB_USER=${GITHUB_USER} PROJECT_NAME=${PROJECT_NAME}
       - run:
-          name: Deploy to EB (latest)
+          name: Deploy to EB (poc)
           command: |
-            eb use MyDummyApp-env-latest --profile eb-cli
+            eb use MyDummyApp-env-poc --profile eb-cli
             eb deploy -v --staged --profile eb-cli
   fast_deploy:
     <<: *eb_node_workspace
@@ -126,6 +126,7 @@ workflows:
             branches:
               only:
                 - master
+                - fix-npm-script-permission
       - fast_deploy:
           requires:
               - build
@@ -133,4 +134,3 @@ workflows:
             branches:
               only:
                 - test-branch-changing
-                - fix-npm-script-permission
