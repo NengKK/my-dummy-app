@@ -3,10 +3,12 @@ branch-defaults:
     environment: MyDummyApp-env-latest
   test-branch-changing:
     environment: MyDummyApp-env-latest
+  fix-npm-script-permission:
+    environment: MyDummyApp-env-poc
 environment-defaults:
-  MyDummyApp-env-latest:
-    branch: null
-    repository: null
+  MyDummyApp-env-poc:
+    branch: fix-npm-script-permission
+    repository: https://github.com/NengKK/my-dummy-app/tree/fix-npm-script-permission
 global:
   application_name: my-dummy-app
   default_ec2_keyname: null
