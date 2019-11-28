@@ -30,6 +30,7 @@ jobs:
       - run:
           name: Avoid hosts unknown for github
           command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+      - run: make branch_switching
       - run: make install
       - save_cache:
           name: Save NPM dependency cache
