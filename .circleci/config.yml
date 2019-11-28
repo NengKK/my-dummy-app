@@ -104,9 +104,9 @@ jobs:
             echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/config
             echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
       - run:
-          name: Deploy to EB (latest)
+          name: Deploy to EB (poc)
           command: |
-            eb use MyDummyApp-env-latest --profile eb-cli
+            eb use MyDummyApp-env-poc --profile eb-cli
             eb deploy -v --staged --profile eb-cli
 workflows:
   version: 2
