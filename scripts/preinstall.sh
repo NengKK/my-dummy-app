@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-echo CIRCLE_BRANCH=$CIRCLE_BRANCH
+echo STAGE=$STAGE
 
-if [ "${CIRCLE_BRANCH}" = "production" ]; then
-    sed -i -e 's/dummy-package.git/dummy-package.git#production/g' ./package.json;
-elif [ "${CIRCLE_BRANCH}" = "master" ]; then
+if [ "${STAGE}" = "test" ]; then
+    sed -i -e 's/dummy-package.git/dummy-package.git#poc/g' ./package.json;
+elif [ "${STAGE}" = "latest" ]; then
     sed -i -e 's/dummy-package.git/dummy-package.git/g' ./package.json;
+elif [ "${STAGE}" = "production" ]; then
+    sed -i -e 's/dummy-package.git/dummy-package.git#production/g' ./package.json;
 else
     sed -i -e 's/dummy-package.git/dummy-package.git#poc/g' ./package.json;
 fi
