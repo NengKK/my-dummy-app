@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 set_stage:
-	if [ "${CIRCLE_BRANCH}" == "poc" ]; \
+	if [ "${CIRCLE_BRANCH}" = "poc" ]; \
 		then export STAGE=test; \
-	elif [ "${CIRCLE_BRANCH}" == "master" ]; \
+	elif [ "${CIRCLE_BRANCH}" = "master" ]; \
 		then export STAGE=latest; \
-	elif [ "${CIRCLE_BRANCH}" == "production" ]; \
+	elif [ "${CIRCLE_BRANCH}" = "production" ]; \
 		then export STAGE=production; \
 	else \
 		export STAGE=test; \
