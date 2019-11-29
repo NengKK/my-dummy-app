@@ -133,4 +133,5 @@ workflows:
           filters:
             branches:
               only:
+                - poc
                 - test-branch-changing
