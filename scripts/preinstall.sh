@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-if [ ! -z "$CIRCLE_CI" ]
+if [ ! -z "$CIRCLE_BRANCH" ]
     then
-        if [ "${CIRCLE_CI}" = "poc" ]; then
+        if [[ "${CIRCLE_BRANCH}" = "poc" || "${CIRCLE_BRANCH}" = "hs_poc" ]]; then
             export STAGE=test;
-        elif [ "${CIRCLE_CI}" = "master" ]; then
+        elif [ "${CIRCLE_BRANCH}" = "master" ]; then
             export STAGE=latest;
-        elif [ "${CIRCLE_CI}" = "production" ]; then
+        elif [ "${CIRCLE_BRANCH}" = "production" ]; then
             export STAGE=production;
         else
             export STAGE=test;

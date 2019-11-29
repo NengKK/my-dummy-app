@@ -78,7 +78,7 @@ jobs:
           name: Set environment variables
           command: |
             eb use MyDummyApp-env-poc --profile eb-cli
-            eb setenv CIRCLE_BRANCH=${CIRCLE_BRANCH} CIRCLE_CI_TOKEN=${CIRCLE_CI_TOKEN} GITHUB_USER=${GITHUB_USER} PROJECT_NAME=${PROJECT_NAME}
+            eb setenv CIRCLE_CI_TOKEN=${CIRCLE_CI_TOKEN} GITHUB_USER=${GITHUB_USER} PROJECT_NAME=${PROJECT_NAME}
       - run:
           name: Deploy to EB (poc)
           command: |
