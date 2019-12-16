@@ -1,10 +1,6 @@
 branch-defaults:
   master:
     environment: MyDummyApp-env-latest
-environment-defaults:
-  MyDummyApp-env-latest:
-    branch: master
-    repository: https://github.com/NengKK/my-dummy-app
 global:
   application_name: my-dummy-app
   default_ec2_keyname: null
