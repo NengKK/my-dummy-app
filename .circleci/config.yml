@@ -126,7 +126,6 @@ workflows:
             branches:
               only:
                 - master
-                - fix-npm-script-permission
       - fast_deploy:
           requires:
               - build
