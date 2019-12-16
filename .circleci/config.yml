@@ -77,12 +77,12 @@ jobs:
       - run:
           name: Set environment variables
           command: |
-            eb use MyDummyApp-env-poc --profile eb-cli
-            eb setenv CIRCLE_CI_TOKEN=${CIRCLE_CI_TOKEN} GITHUB_USER=${GITHUB_USER} PROJECT_NAME=${PROJECT_NAME}
+            eb use MyDummyApp-env-latest --profile eb-cli
+            eb setenv CIRCLE_CI_TOKEN=${CIRCLE_CI_TOKEN} GITHUB_USER=${GITHUB_USER} PROJECT_NAME=${PROJECT_NAME} CIRCLE_CI_TEST_BRANCH=${CIRCLE_CI_TEST_BRANCH}
       - run:
-          name: Deploy to EB (poc)
+          name: Deploy to EB (latest)
           command: |
-            eb use MyDummyApp-env-poc --profile eb-cli
+            eb use MyDummyApp-env-latest --profile eb-cli
             eb deploy -v --staged --profile eb-cli
   fast_deploy:
     <<: *eb_node_workspace
@@ -104,9 +104,9 @@ jobs:
             echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/config
             echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
       - run:
-          name: Deploy to EB (poc)
+          name: Deploy to EB (latest)
           command: |
-            eb use MyDummyApp-env-poc --profile eb-cli
+            eb use MyDummyApp-env-latest --profile eb-cli
             eb deploy -v --staged --profile eb-cli
 workflows:
   version: 2
